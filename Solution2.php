@@ -1,14 +1,15 @@
 <?php
 
-$file = fopen('address.csv', 'r');
+use League\Csv\Reader;
 
-while (($line = fgetcsv($file)) !== FALSE){
+$csv = Reader::createFromPath('address.csv', 'r');
+$csv->setHeaderOffset(0);
 
-	if(){
-		print_r($line);
+$header = $csv->getHeader();
+$records = $csv->getRecords();
+
+foreach($records as $record){
+	if($record[3] === "Ontario"){
+		print_r($record);
 	}
-
-
 }
-
-fclose($file);
